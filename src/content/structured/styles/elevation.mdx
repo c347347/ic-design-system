@@ -31,6 +31,60 @@ There are three layers:
   caption="An example of an application showing the different layers of interaction. This includes the base layer with some raised content, the overlay layer and the modal layer."
 />
 
+Tokens are provided for the z-index values of components which sit above the base layer as well as the base z-index itself:
+
+| <span style={{width: '5vw', display: 'inline-block'}}>**Token**</span> | **Component**                                                                                              | **Calculated z-index** |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------- |
+| --ic-z-index-base-value                                                | Base z-index value. Used to calculate z-index of other ic components that sit above the base layer.        | 0 (Base)               |
+| --ic-z-index-page-header                                               | [Page header](/components/page-header)                                                                     | Base + 10              |
+| --ic-z-index-back-to-top                                               | [Back to top](/components/back-to-top)                                                                     | Base + 20              |
+| --ic-z-index-menu                                                      | Menu for [select](/components/select) and [search bar](/components/search-bar)                             | Base + 50              |
+| --ic-z-index-popover                                                   | Popover menu                                                                                               | Base + 50              |
+| --ic-z-index-navigation-item                                           | Navigation item used in [top navigation](/components/top-nav) and [side navigation](/components/side-nav). | Base + 50              |
+| --ic-z-index-navigation-menu                                           | Navigation menu used in [top navigation](/components/top-nav) at smaller breakpoints.                      | Base + 60              |
+| --ic-z-index-side-navigation                                           | [Side navigation](/components/side-nav)                                                                    | Base + 60              |
+| --ic-z-index-dialog                                                    | Dialog                                                                                                     | Base + 100             |
+| --ic-z-index-tooltip                                                   | [Tooltip](/components/tooltip)                                                                             | Base + 110             |
+| --ic-z-index-classification-banner                                     | [Classification banner](/components/classification-banner)                                                 | Base + 200             |
+
+Users can change the base value in their css:
+
+```css
+:root {
+  --ic-z-index-base-value: 1000;
+}
+```
+
+Which will cause all other z-index tokens to be calculated from this new value.
+
+Additionally users can change the z-index value for a specific token, affecting a specific component, either globally:
+
+```css
+:root {
+  --ic-z-index-tooltip: 200;
+}
+```
+
+Or for a specific instance or instances of a component:
+
+<!-- prettier-ignore-start -->
+```html
+<ic-tooltip id="my-tooltip-id">...</ic-tooltip>
+
+#my-tooltip-id {
+  --ic-z-index-tooltip: 300;
+}
+```
+
+```html
+<ic-tooltip class="my-tooltip-class">...</ic-tooltip>
+
+.my-tooltip-class {
+  --ic-z-index-tooltip: 300;
+}
+```
+<!-- prettier-ignore-end -->
+
 ## Shadows
 
 Each interaction layer has a defined shadow to provide the sense of depth.
